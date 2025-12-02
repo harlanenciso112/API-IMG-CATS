@@ -3,12 +3,14 @@ import requests
 import sqlite3
 from datetime import datetime
 import hashlib
-import base64
+import os
 
 app = Flask(__name__)
 
+DB_PATH = os.path.join(os.path.dirname(__file__), 'cats.db')
+
 def init_db():
-    conn = sqlite3.connect('cats.db')
+    conn = sqlite3.connect(DB_PATH)
     cursor = conn.cursor()
     cursor.execute('''
         CREATE TABLE IF NOT EXISTS images (
@@ -31,7 +33,7 @@ def get_cat():
     image_hash = hashlib.md5(image_data).hexdigest()
     now = datetime.now().isoformat()
     
-    conn = sqlite3.connect('cats.db')
+    conn = sqlite3.connect(DB_PATH)
     cursor = conn.cursor()
     
     cursor.execute('SELECT id FROM images WHERE image_hash = ?', (image_hash,))
@@ -52,7 +54,7 @@ def get_cat():
 
 @app.route('/api/count', methods=['GET'])
 def get_count():
-    conn = sqlite3.connect('cats.db')
+    conn = sqlite3.connect(DB_PATH)
     cursor = conn.cursor()
     cursor.execute('SELECT COUNT(*) FROM images')
     count = cursor.fetchone()[0]
@@ -61,7 +63,7 @@ def get_count():
 
 @app.route('/api/images', methods=['GET'])
 def get_all_images():
-    conn = sqlite3.connect('cats.db')
+    conn = sqlite3.connect(DB_PATH)
     cursor = conn.cursor()
     
     cursor.execute('SELECT id, created_at, last_called_at FROM images')
@@ -80,7 +82,7 @@ def get_all_images():
 
 @app.route('/api/image/<int:id>', methods=['GET'])
 def get_image(id):
-    conn = sqlite3.connect('cats.db')
+    conn = sqlite3.connect(DB_PATH)
     cursor = conn.cursor()
     
     cursor.execute('SELECT image_data, created_at, last_called_at FROM images WHERE id = ?', (id,))
@@ -98,7 +100,7 @@ def get_image(id):
 
 @app.route('/api/delete/<int:id>', methods=['DELETE'])
 def delete_img(id):
-    conn = sqlite3.connect('cats.db')
+    conn = sqlite3.connect(DB_PATH)
     cursor = conn.cursor()
     
     cursor.execute('SELECT id FROM images WHERE id = ?', (id,))
