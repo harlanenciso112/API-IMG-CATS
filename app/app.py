@@ -59,6 +59,25 @@ def get_count():
     conn.close()
     return jsonify({'total_images': count})
 
+@app.route('/api/images', methods=['GET'])
+def get_all_images():
+    conn = sqlite3.connect('cats.db')
+    cursor = conn.cursor()
+    
+    cursor.execute('SELECT id, created_at, last_called_at FROM images')
+    rows = cursor.fetchall()
+    conn.close()
+    
+    images = []
+    for row in rows:
+        images.append({
+            'id': row[0],
+            'created_at': row[1],
+            'last_called_at': row[2]
+        })
+    
+    return jsonify(images)
+
 @app.route('/api/image/<int:id>', methods=['GET'])
 def get_image(id):
     conn = sqlite3.connect('cats.db')
