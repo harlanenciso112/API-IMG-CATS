@@ -24,7 +24,7 @@ def init_db():
 
 init_db()
 
-@app.route('/cat', methods=['GET'])
+@app.route('/api/cat', methods=['GET'])
 def get_cat():
     response = requests.get('https://cataas.com/cat')
     image_data = response.content
@@ -50,7 +50,7 @@ def get_cat():
     
     return Response(image_data, mimetype='image/png')
 
-@app.route('/count', methods=['GET'])
+@app.route('/api/count', methods=['GET'])
 def get_count():
     conn = sqlite3.connect('cats.db')
     cursor = conn.cursor()
@@ -59,7 +59,7 @@ def get_count():
     conn.close()
     return jsonify({'total_images': count})
 
-@app.route('/image/<int:id>', methods=['GET'])
+@app.route('/api/image/<int:id>', methods=['GET'])
 def get_image(id):
     conn = sqlite3.connect('cats.db')
     cursor = conn.cursor()
@@ -77,7 +77,7 @@ def get_image(id):
         'last_called_at': row[2]
     })
 
-@app.route('/delete/<int:id>', methods=['DELETE'])
+@app.route('/api/delete/<int:id>', methods=['DELETE'])
 def delete_img(id):
     conn = sqlite3.connect('cats.db')
     cursor = conn.cursor()
