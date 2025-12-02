@@ -11,6 +11,14 @@ cd api-gatos
 ```
 
 2. Ejecuta el script:
+
+**Linux/Mac:**
+```bash
+chmod +x run.sh
+./run.sh
+```
+
+**Windows (Git Bash o WSL):**
 ```bash
 bash run.sh
 ```
