@@ -29,22 +29,22 @@ class TestIntegracion(unittest.TestCase):
         self.client = app.test_client()
     
     def test_get_cat(self):
-        response = self.client.get('/cat')
+        response = self.client.get('/api/cat')
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.content_type, 'image/png')
     
     def test_get_count(self):
-        response = self.client.get('/count')
+        response = self.client.get('/api/count')
         self.assertEqual(response.status_code, 200)
         data = response.get_json()
         self.assertIn('total_images', data)
     
     def test_get_image_not_found(self):
-        response = self.client.get('/image/9999')
+        response = self.client.get('/api/image/9999')
         self.assertEqual(response.status_code, 404)
     
     def test_delete_not_found(self):
-        response = self.client.delete('/delete/9999')
+        response = self.client.delete('/api/delete/9999')
         self.assertEqual(response.status_code, 404)
 
 if __name__ == '__main__':
