@@ -5,7 +5,7 @@ Servicio backend que obtiene imagenes aleatorias de gatos desde [cataas.com](htt
 # DespliEgue en AWS
 
 ```
-[https://www.youtube.com/watch?v=YYRwaMdgW6M](https://www.youtube.com/watch?v=YYRwaMdgW6M)
+https://www.youtube.com/watch?v=YYRwaMdgW6M
 ```
 
 ## Ejecutar con Docker Compose
