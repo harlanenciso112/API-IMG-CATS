@@ -2,6 +2,12 @@
 
 Servicio backend que obtiene imagenes aleatorias de gatos desde [cataas.com](https://cataas.com) y las almacena en una base de datos SQLite.
 
+# DespliEgue en AWS
+
+```
+[https://www.youtube.com/watch?v=YYRwaMdgW6M](https://www.youtube.com/watch?v=YYRwaMdgW6M)
+```
+
 ## Ejecutar con Docker Compose
 
 1. Clona el repositorio:
